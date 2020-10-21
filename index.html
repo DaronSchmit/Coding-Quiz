@@ -13,23 +13,37 @@
 </head>
 
 <body>
+  <div id="empty-div"></div>
 
   <main class = "container">
 
     <row class = "row">
-      <article class = "column-12-sm mx-auto">
-        <button class="btn btn-primary" type="submit">Start Quiz</button>
+      <h1 class = "mx-auto">Enjoy the Quiz!</h1>
+    </row>
+    <br><br><br>
+    <row class = "row">
+      <aside class = "column-3-sm" id="high-scores">
+        <p id="placeholder"></p>
+      </aside>
+
+      <article class = "column-6-sm mx-auto">
+        <button class="btn btn-primary" type="submit" id = "start-btn"></button>
         <h3 id="question"></h3>
-        <ul id="answers"></ul>
+        <ul id="options"></ul>
       </article>
+
+      <aside class="column-3-sm" id="stopwatch"></aside>
+      
     </row>
 
   </main>
-  
-        <footer class="sticky-bottom card-footer bg-dark footer-font-style text-muted footer-position">
-          <p>Copyright Daron Schmit 2020</p>
-        </footer>
 
+<footer class="sticky-bottom card-footer bg-dark footer-font-style text-muted footer-position">
+    <p>Copyright Daron Schmit 2020</p>
+  </footer>
+        
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <script src="script.js"></script>
  </body>
 
 
