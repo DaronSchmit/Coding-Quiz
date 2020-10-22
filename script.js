@@ -32,97 +32,100 @@ all questions are in an array, ask in a row
 TIMERS, DOM, DYNAMIC HTML, OBJECTS
 */
 
-function displayQuestion(currentQuestion){
-    $("#question").text(currentQuestion.prompt);
-}
+
 let stopwatchHTML = $("<div class='timer'>");
-let secondsPassed = "00";
-let minutesPassed = "00";
-let hoursPassed = "00";
+let secondsLeft = "300";
+let score = 0;
 
-var myVar;
 
-function myFunction() {
+let myVar;
+
+function startStopwatch() {
   myVar = setInterval(updateStopwatch, 1000);
 }
 
-function alertFunc() {
-  alert("Hello!");
-}
 
 function updateStopwatch(){
     console.log("stopwatch ticking...");
-    secondsPassed = parseInt(secondsPassed);
-    minutesPassed = parseInt(minutesPassed);
-    hoursPassed = parseInt(hoursPassed);
+    secondsLeft--;
 
-    secondsPassed++;
+    if(secondsLeft < 100){
+        secondsLeft = "0".concat(secondsLeft);
+    }
+    if(secondsLeft < 10){
+        secondsLeft = "0".concat(secondsLeft);
+    }      
 
-    if(secondsPassed === 60){
-        minutesPassed++;
-        secondsPassed = 0;
-    }
-    if(minutesPassed === 60){
-        hoursPassed++;
-        minutesPassed = 0;
-    }
-    if(secondsPassed < 10){
-        secondsPassed = "0".concat(secondsPassed);
-    }
-    if(minutesPassed < 10){
-        minutesPassed = "0".concat(minutesPassed);
-    }        
-    if(hoursPassed < 10){
-        hoursPassed = "0".concat(hoursPassed);
-    }
-
-    $("#stopwatch-timer").text(hoursPassed + ":" + minutesPassed + ":" + secondsPassed )
+    $("#stopwatch-timer").text(secondsLeft)
+    secondsLeft = parseInt(secondsLeft);
 }
 
 
 function startQuiz(){
-    $("#stopwatch-div").append("<h4 style='text-align: center' id='stopwatch-title'>Stopwatch</h4>");
+    $("#stopwatch-div").append("<h4 style='text-align: center' id='stopwatch-title'>Seconds Left</h4>");
     $("#stopwatch-div").append("<h4 style='text-align: center' id='stopwatch-timer'></h4>");
-    $("#stopwatch-timer").text(hoursPassed + ":" + minutesPassed + ":" + secondsPassed )
-    myFunction();
+    $("#stopwatch-timer").text(secondsLeft )
+    startStopwatch();
     $("#start-btn").hide();
     console.log("quiz started");
-    
+    promptQuestion(questionList);
 }
 
-// If we needed each line to be its own div, we could just as easily create a new div.
-let newDiv = $("<div>");
 
-newDiv.text("butts");
+function wrongAnswer(){
+    secondsLeft -= 10;
+}
 
-// NOTICE THE DIFFERENCE
-// ---------------------
-// $("#empty-div")   <-- FIND a DOM node with the ID empty-div
-// $("<div>")        <-- CREATE a new DIV
+function correctAnswer(){
+    score++;
+    console.log(score);
+    $("#options").empty();
+    $("#question").text("");
+}
 
-// We can then  append it to the other div using the same ".append" method.
-$("#empty-div").append(newDiv);
+function promptQuestion(questionArray){
+    $("#question").text(questionArray[0].prompt);
+    for(i in questionArray[0].options){
+        let newLi = $("<li style='list-style-type:none'>");
+        let newBtn = $("<button class ='btn btn-primary mx-auto' id='btn-option'>");
+        $(newBtn).text(questionArray[0].options[i]);
+        if(questionArray[0].options[i] === questionArray[0].answer){
+            $(newBtn).click(function(){
+                correctAnswer();
+                return promptQuestion(questionArray.slice(1,questionArray.length));
+            });
+        }
+        else{
+            $(newBtn).click(wrongAnswer);
+        }
 
-
+        $("#options").append(newLi, "<br>");
+        $(newLi).append(newBtn);
+    }
+}
 
 let question1 = {
     prompt: "What floats in water?",
-    options: ["Bread","Apples","Very small rocks","Wood"]
+    options: ["Great gravy","Apples","Very small rocks","Wood"],
+    answer: "Wood"
 }
 
 let question2 = {
     prompt: "Who are you, who are so wise in the ways of science?",
-    options: ["I am Arthur, king of the Britons.","My name is... Tim?","My name is Sir Lancelot","The Brave Ser Robin"]
+    options: ["Arthur, King of the Britons.","... Tim?","Sir Lancelot","The Brave Ser Robin"],
+    answer: "Arthur, King of the Britons."
 }
 
 let question3 = {
     prompt: "What have the romans ever done for us?",
-    options: ["Nothing","Sanitation, medicine, education, wine, public order, irrigation, roads, fresh-water system, and public health","Peace?","Oh... peace? SHUT UP!"]
+    options: ["Nothing","Sanitation, medicine, education, wine, public order, irrigation, roads, fresh-water system, and public health","Peace?","Oh... peace? SHUT UP!"],
+    answer: "Sanitation, medicine, education, wine, public order, irrigation, roads, fresh-water system, and public health"
 }
 
 let question4 = {
     prompt: "What is a pointer in Javascript?",
-    options: ["An html element that draws attention to another element", "The nitty gritty definition for a variable","The icon the user uses to select things on a webpage","The guy behind you who sees the semicolon you missed"]
+    options: ["An html element that draws attention to another element", "The nitty gritty definition for a variable","The icon the user uses to select things on a webpage","The guy behind you who sees the semicolon you missed"],
+    answer: "The nitty gritty definition for a variable"
 }
 
 let questionList = [question1, question2, question3, question4];
@@ -130,3 +133,4 @@ let questionList = [question1, question2, question3, question4];
 
 $("button").html("Start Quiz");
 $("#start-btn").click(startQuiz);
+
