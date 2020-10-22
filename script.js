@@ -38,10 +38,10 @@ let secondsLeft = "300";
 let score = 0;
 
 
-let myVar;
+let ticker;
 
 function startStopwatch() {
-  myVar = setInterval(updateStopwatch, 1000);
+  ticker = setInterval(updateStopwatch, 1000);
 }
 
 
@@ -83,7 +83,19 @@ function correctAnswer(){
     $("#question").text("");
 }
 
+//TODO
+function displayScoreScreen(){
+    alert("TODO: WRITE THE HIGH SCORE INITIAL ENTERING AND LOCAL SAVE DATA");
+}
+
 function promptQuestion(questionArray){
+    console.log("questions left: " + questionArray.length);
+    if(questionArray.length === 0){
+        clearInterval(ticker);
+        displayScoreScreen();
+        return;
+    }
+
     $("#question").text(questionArray[0].prompt);
     for(i in questionArray[0].options){
         let newLi = $("<li style='list-style-type:none'>");
@@ -92,7 +104,8 @@ function promptQuestion(questionArray){
         if(questionArray[0].options[i] === questionArray[0].answer){
             $(newBtn).click(function(){
                 correctAnswer();
-                return promptQuestion(questionArray.slice(1,questionArray.length));
+                
+                promptQuestion(questionArray.slice(1,questionArray.length));
             });
         }
         else{
