@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="style.css">
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <!-- https://daronschmit.github.io/Coding-Quiz/
   https://github.com/DaronSchmit/Coding-Quiz -->
 
@@ -13,26 +13,29 @@
 </head>
 
 <body>
-  <div id="empty-div"></div>
-
+  
   <main class = "container">
+    <div id="empty-div"></div>
 
     <row class = "row">
       <h1 class = "mx-auto">Enjoy the Quiz!</h1>
     </row>
+
     <br><br><br>
+
     <row class = "row">
-      <aside class = "column-3-sm" id="high-scores">
-        <p id="placeholder"></p>
-      </aside>
+
+      <aside class="column-3-sm" id="stopwatch-div"></aside>
 
       <article class = "column-6-sm mx-auto">
         <button class="btn btn-primary" type="submit" id = "start-btn"></button>
         <h3 id="question"></h3>
         <ul id="options"></ul>
       </article>
-
-      <aside class="column-3-sm" id="stopwatch"></aside>
+      
+      <aside class = "column-3-sm" id="high-scores">
+        <p id="placeholder"></p>
+      </aside>
       
     </row>
 
@@ -42,7 +45,7 @@
     <p>Copyright Daron Schmit 2020</p>
   </footer>
         
- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
  <script src="script.js"></script>
  </body>
 

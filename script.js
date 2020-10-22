@@ -35,17 +35,64 @@ TIMERS, DOM, DYNAMIC HTML, OBJECTS
 function displayQuestion(currentQuestion){
     $("#question").text(currentQuestion.prompt);
 }
+let stopwatchHTML = $("<div class='timer'>");
+let secondsPassed = "00";
+let minutesPassed = "00";
+let hoursPassed = "00";
+
+var myVar;
+
+function myFunction() {
+  myVar = setInterval(updateStopwatch, 1000);
+}
+
+function alertFunc() {
+  alert("Hello!");
+}
+
+function updateStopwatch(){
+    console.log("stopwatch ticking...");
+    secondsPassed = parseInt(secondsPassed);
+    minutesPassed = parseInt(minutesPassed);
+    hoursPassed = parseInt(hoursPassed);
+
+    secondsPassed++;
+
+    if(secondsPassed === 60){
+        minutesPassed++;
+        secondsPassed = 0;
+    }
+    if(minutesPassed === 60){
+        hoursPassed++;
+        minutesPassed = 0;
+    }
+    if(secondsPassed < 10){
+        secondsPassed = "0".concat(secondsPassed);
+    }
+    if(minutesPassed < 10){
+        minutesPassed = "0".concat(minutesPassed);
+    }        
+    if(hoursPassed < 10){
+        hoursPassed = "0".concat(hoursPassed);
+    }
+
+    $("#stopwatch-timer").text(hoursPassed + ":" + minutesPassed + ":" + secondsPassed )
+}
 
 
 function startQuiz(){
-    //startTimer(); TODO
+    $("#stopwatch-div").append("<h4 style='text-align: center' id='stopwatch-title'>Stopwatch</h4>");
+    $("#stopwatch-div").append("<h4 style='text-align: center' id='stopwatch-timer'></h4>");
+    $("#stopwatch-timer").text(hoursPassed + ":" + minutesPassed + ":" + secondsPassed )
+    myFunction();
     $("#start-btn").hide();
     console.log("quiz started");
     
 }
 
 // If we needed each line to be its own div, we could just as easily create a new div.
-var newDiv = $("<div>");
+let newDiv = $("<div>");
+
 newDiv.text("butts");
 
 // NOTICE THE DIFFERENCE
