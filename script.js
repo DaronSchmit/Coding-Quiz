@@ -99,9 +99,16 @@ function promptQuestion(questionArray){
     }
 
     $("#question").text(questionArray[0].prompt);
+    if(questionArray[0].prompt === "Nobody expects the spanish inquisition! Amongst our weaponry are such elements as: "){
+        $("#question").prepend("<br><div class='text-center'><img class = 'text-center' src='"+questionArray[0].unexpected +"' /></div><br>")
+    }
+
+
     for(i in questionArray[0].options){
         let newLi = $("<li style='list-style-type:none'>");
         let newBtn = $("<button class ='btn btn-primary mx-auto' id='btn-option'>");
+
+
         $(newBtn).text(questionArray[0].options[i]);
         if(questionArray[0].options[i] === questionArray[0].answer){
             $(newBtn).click(function(){
@@ -138,9 +145,10 @@ let question3 = {
 }
 
 let question4 = {
-    prompt: "What is a pointer in Javascript?",
-    options: ["An html element that draws attention to another element", "The nitty gritty definition for a variable","The icon the user uses to select things on a webpage","The guy behind you who sees the semicolon you missed"],
-    answer: "The nitty gritty definition for a variable"
+    prompt: "Amongst our weaponry are such elements as: ",
+    options: ["Fear", "Surprise and Fear", "Fear and Surprise","Fear and Surprise... and Rutheless Efficiency", "Fear, Surprise, and Rutheless Efficiency... and an almost fanatical devotion to the pope"],
+    answer: "Fear, Surprise, and Rutheless Efficiency... and an almost fanatical devotion to the pope",
+    unexpected: "https://64.media.tumblr.com/898419954d6ff3f7b307c8d128db94c6/tumblr_p814cuvBqb1wzvt9qo3_500.gifv"
 }
 
 let questionList = [question1, question2, question3, question4];
