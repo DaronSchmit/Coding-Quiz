@@ -86,6 +86,8 @@ function correctAnswer(){
 //TODO
 function displayScoreScreen(){
     alert("TODO: WRITE THE HIGH SCORE INITIAL ENTERING AND LOCAL SAVE DATA");
+    $("#question").text("Your Score: " + score);
+    $("#question").append("<h3>Seconds Left: " + secondsLeft + "</h3>");
 }
 
 function promptQuestion(questionArray){
