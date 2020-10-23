@@ -37,8 +37,27 @@ let stopwatchHTML = $("<div class='timer'>");
 let secondsLeft = "300";
 let score = 0;
 
+let highscores = JSON.parse(localStorage.getItem("highscores"));
 
+//Create High scores list on right side column
+$("#scoreslist").append("<li><h4 style='font-size: medium'>Name__Score__Seconds Left</h4></li>")
+if(highscores === null){
+    highscores = [];
+}
+else{
+    for(i in highscores) {
+        $("#scoreslist").append("<li style='font-size: small'>" + upToTenCharacters(highscores[i][0]) + upToTenCharacters(highscores[i][1]) + highscores[i][2] + "</li>");
+    }
+}
 let ticker;
+
+function upToTenCharacters(string){
+    string = string.toString();
+    while(string.length < 10){
+        string = string.concat("_");
+    }
+    return string;
+}
 
 function startStopwatch() {
   ticker = setInterval(updateStopwatch, 1000);
@@ -88,6 +107,21 @@ function displayScoreScreen(){
     alert("TODO: WRITE THE HIGH SCORE INITIAL ENTERING AND LOCAL SAVE DATA");
     $("#question").text("Your Score: " + score);
     $("#question").append("<h3>Seconds Left: " + secondsLeft + "</h3>");
+    $("#options").append("<input type='text' id='highscore-name'></text>");
+    $("#options").append("<button id='highscore-submit'>Submit</button>");
+
+    $("#highscore-submit").click(function(){
+        let savescore = [$("#highscore-name").val(), score, secondsLeft];
+        // $("#placeholder").text(savescore);
+        console.log("saving score");
+        highscores.push(savescore);
+        localStorage.setItem('highscores', JSON.stringify(highscores));
+        $("#scores-list").append("<li>" + upToTenCharacters(highscores[i][0]) + upToTenCharacters(highscores[i][1]) + upToTenCharacters(highscores[i][2]) + "</li>");
+        $("#options").append("<li>" + upToTenCharacters(highscores[i][0]) + upToTenCharacters(highscores[i][1]) + upToTenCharacters(highscores[i][2]) + "</li>");
+        $("#scoreslist").append("<li style='font-size: small'>" + upToTenCharacters(savescore[0]) + upToTenCharacters(savescore[1]) + savescore[2] + "</li>");
+        $("#main-content").empty();
+        $("#main-content").append("<h3>" + upToTenCharacters(savescore[0]) + upToTenCharacters(savescore[1]) + savescore[2] + "</h3>");
+    });
 }
 
 function promptQuestion(questionArray){
@@ -99,7 +133,7 @@ function promptQuestion(questionArray){
     }
 
     $("#question").text(questionArray[0].prompt);
-    if(questionArray[0].prompt === "Nobody expects the spanish inquisition! Amongst our weaponry are such elements as: "){
+    if(questionArray[0].prompt === "Amongst our weaponry are such elements as: "){
         $("#question").prepend("<br><div class='text-center'><img class = 'text-center' src='"+questionArray[0].unexpected +"' /></div><br>")
     }
 
@@ -113,14 +147,12 @@ function promptQuestion(questionArray){
         if(questionArray[0].options[i] === questionArray[0].answer){
             $(newBtn).click(function(){
                 correctAnswer();
-                
                 promptQuestion(questionArray.slice(1,questionArray.length));
             });
         }
         else{
             $(newBtn).click(wrongAnswer);
         }
-
         $("#options").append(newLi, "<br>");
         $(newLi).append(newBtn);
     }
@@ -148,10 +180,11 @@ let question4 = {
     prompt: "Amongst our weaponry are such elements as: ",
     options: ["Fear", "Surprise and Fear", "Fear and Surprise","Fear and Surprise... and Rutheless Efficiency", "Fear, Surprise, and Rutheless Efficiency... and an almost fanatical devotion to the pope"],
     answer: "Fear, Surprise, and Rutheless Efficiency... and an almost fanatical devotion to the pope",
-    unexpected: "https://64.media.tumblr.com/898419954d6ff3f7b307c8d128db94c6/tumblr_p814cuvBqb1wzvt9qo3_500.gifv"
+    unexpected: "Assets/unexpected.gif"
 }
 
 let questionList = [question1, question2, question3, question4];
+
 
 
 $("button").html("Start Quiz");
