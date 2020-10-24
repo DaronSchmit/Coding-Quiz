@@ -1,50 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-  <!-- https://daronschmit.github.io/Coding-Quiz/
+    <!-- https://daronschmit.github.io/Coding-Quiz/
   https://github.com/DaronSchmit/Coding-Quiz -->
 
     <title>Daron Code Quiz</title>
-</head>
+  </head>
 
-<body>
-  
-  <main class = "container">
-    <div id="empty-div"></div>
+  <body>
+    <style>
+      h4 {
+        font-size: medium;
+      }
+      article {
+        padding: 5%;
+        text-align: center;
+      }
 
-    <row class = "row">
-      <h1 class = "mx-auto">Enjoy the Quiz!</h1>
-    </row>
+      aside {
+        padding: 1%;
+        text-align: center;
+      }
+    </style>
 
-    <br><br><br>
+    <main class="container">
+      <div id="empty-div"></div>
 
-    <row class = "row">
+      <row class="row">
+        <h1 class="mx-auto">Enjoy the Quiz!</h1>
+      </row>
 
-      <aside class="column-3-sm" id="stopwatch-div"></aside>
+      <row class="row">
+        <aside
+          class="column-3-sm w-25"
+          id="stopwatch-div"
+          style="max-width: 25%; text-align: center"
+        ></aside>
 
-      <article class = "column-6-sm mx-auto" id="main-content">
-        <button class="btn btn-primary text-center " type="submit" id = "start-btn"></button>
-        <h3 id="question"></h3>
-        <ul class = "text-center" id="options"></ul>
-      </article>
-      
-      <aside class = "column-3-sm" id="high-scores">
-        <ul id="scoreslist"style="list-style-type:none;"></ul>
+        <article
+          class="column-6-sm mx-auto w-50 text-center"
+          id="main-content"
+        ></article>
 
-      </aside>
-      
-    </row>
+        <aside class="column-3-sm w-25" id="high-scores">
+        </aside>
+      </row>
+    </main>
 
-  </main>
-
- <script src="script.js"></script>
- </body>
-
-
+    <script src="script.js"></script>
+  </body>
 </html>
